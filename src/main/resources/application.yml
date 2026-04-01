@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: nexus-copilot
+  # 自動啟動虛擬執行緒，處理 AI 併發的高手
+  threads:
+    virtual:
+      enabled: true
+
+  # OpenAI 配置
+  ai:
+    openai:
+      api-key: ${DEEPSEEK_API_KEY}
+      base-url: ${DEEPSEEK_URL:https://api.deepseek.com}
+      chat:
+        options:
+          model: deepseek-chat
+
+  # 資料庫配置
+  datasource:
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+
+  # 自動根據你的 Java 類別在資料庫建表
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
