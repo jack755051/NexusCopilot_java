@@ -1,4 +1,8 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB      # 單一檔案最大限制
+      max-request-size: 50MB    # 單次請求（多檔總和）最大限制
   application:
     name: nexus-copilot
   # 自動啟動虛擬執行緒，處理 AI 併發的高手
