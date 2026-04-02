@@ -33,6 +33,10 @@ dependencies {
     implementation("org.springframework.ai:spring-ai-starter-model-openai") // DeepSeek 使用此項
     implementation("org.springframework.ai:spring-ai-starter-vector-store-pgvector")
 
+    // 檔案格式支援
+    implementation("org.springframework.ai:spring-ai-pdf-document-reader") // 支援 PDF 讀取
+    implementation("org.springframework.ai:spring-ai-tika-document-reader") // 支援 Office 檔案 (Word/Excel) - 選配
+
     // 2. 已移除 Ollama (因為你決定全 API 運作)
 
     // 開發工具與資料庫
