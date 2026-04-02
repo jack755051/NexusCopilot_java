@@ -16,10 +16,18 @@ public class IngestionController {
     }
 
     @PostMapping("/upload")
-    public String upload(@RequestParam("file") MultipartFile file) throws IOException {
-        // 將上傳的檔案轉成 Resource 並交給 Service 處理
-        var resource = new InputStreamResource(file.getInputStream());
-        ingestionService.ingest(resource);
-        return "文件已成功向量化並存入資料庫！";
+    public String upload(@RequestParam("file") MultipartFile[] files) throws IOException {
+        // 遍歷所有上傳的檔案
+        for(MultipartFile file:files){
+            if(!file.isEmpty()){
+                // 將上傳的檔案轉成 Resource 並交給 Service 處理
+                String contentType = file.getContentType();
+                if (contentType != null && (contentType.contains("text") || contentType.contains("pdf"))) {
+                    var resource = new InputStreamResource(file.getInputStream());
+                    ingestionService.ingest(resource, file.getOriginalFilename());
+                }
+            }
+        }
+        return "已成功處理 " + files.length + " 個檔案並存入向量資料庫！";
     }
 }
